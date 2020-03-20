@@ -1,11 +1,19 @@
--   #1
--   #2 passport config
--   #3 passport auth route
--   #4 token client side
--   #5 store token in local storage
--   #6 context setup
--   #7 global state for login / token
--   #8 Router client side
+~~#1 db model config~~
 
--   #LAST http error response codes
--   #LAAAAAST styling
+~~#2 passport config~~
+
+#3 passport auth route
+
+#4 token client side
+
+#5 store token in local storage
+
+#6 context setup
+
+#7 global state for login / token
+
+#8 Router client side
+
+#LAST http error response codes
+
+#LAAAAAST styling

@@ -13,6 +13,9 @@ app.use(express.json());
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
+// API ROUTES
+require('./routes/userRoutes')(app);
+
 // DATABASE CONNECTION
 mongoose
     .connect(process.env.DB_LINK, {
