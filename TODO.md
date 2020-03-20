@@ -1,10 +1,11 @@
--   #1 passport config
--   #2 passport auth route
--   #3 token client side
--   #4 store token in local storage
--   #5 context setup
--   #6 global state for login / token
--   #7 Router client side
+-   #1
+-   #2 passport config
+-   #3 passport auth route
+-   #4 token client side
+-   #5 store token in local storage
+-   #6 context setup
+-   #7 global state for login / token
+-   #8 Router client side
 
 -   #LAST http error response codes
 -   #LAAAAAST styling
