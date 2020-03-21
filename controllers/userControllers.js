@@ -57,6 +57,6 @@ module.exports = {
             email: userFound.email
         };
         const token = await jwt.sign(payload, secret, { expiresIn: '1hr' });
-        res.status(200).send({ token: token });
+        res.status(200).send({ ...payload, token: `Bearer ${token}` });
     }
 };

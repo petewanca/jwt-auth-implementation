@@ -2,7 +2,7 @@
 
 ~~#2 passport config~~
 
-#3 passport auth route
+~~#3 passport auth route~~
 
 #4 token client side
 
