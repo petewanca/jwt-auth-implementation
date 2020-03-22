@@ -9,7 +9,7 @@ module.exports = (app) => {
 
     app.post('/api/user/login', LoginController);
 
-    app.get('/api/user/test', passport.authenticate('jwt', { session: false }), (req, res) => {
+    app.get('/api/user/validate', passport.authenticate('jwt', { session: false }), (req, res) => {
         res.json('Authorized');
     });
 };

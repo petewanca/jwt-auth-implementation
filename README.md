@@ -1,31 +1,28 @@
 # DESC
 
-A full stack demo of user auth utilizing...
+A full stack demo of user auth utilizing MERN stack (MongoDB, Express, React, Node). React Context with Hooks for state management and Passport for user authorization. Validating input with Hapi/Joi.
 
-## TECH
+## IN PROGRESS
 
-React (hooks, Context), Node/Express, Passport (JWT), MongoDB and a whole lotta packages.
+handle login / updating user context after login
 
-## TODO
+-   User logs in through form at component level
+-   User input is stored in state at component level
+-   Pull login function from context and use state level input to send call to backend
 
-~~#1 db model config~~
+## NEXT
 
-~~#2 passport config~~
+-   reducer setup
+-   global state for login / token
+-   LAST http error response codes
+-   LAAAAAST styling
 
-~~#3 passport auth route~~
+## COMPLETE
 
-#4 token client side
-
-#5 store token in local storage
-
-~~#6 context setup~~
-
-#7 reducer setup
-
-#8 global state for login / token
-
-#9 Router client side
-
-#LAST http error response codes
-
-#LAAAAAST styling
+-   db model config
+-   passport config
+-   passport auth route
+-   context setup
+-   get token client side
+-   store token in local storage
+-   basic client side router
