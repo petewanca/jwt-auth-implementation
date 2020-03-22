@@ -6,12 +6,6 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [user, setUser] = useState({
-        id: '',
-        email: '',
-        firstName: '',
-        lastName: ''
-    });
 
     const login = (e, email, password) => {
         e.preventDefault();
@@ -37,10 +31,6 @@ export const UserContextProvider = ({ children }) => {
             url: '/api/user/validate',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
-            },
-            data: {
-                email: 'pete@pete.com',
-                password: 'password'
             }
         })
             .then((res) => console.log(res.data))
@@ -69,7 +59,9 @@ export const UserContextProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ login, checkTokenExp, validateToken }}>
+        <UserContext.Provider
+            value={{ loggedIn, setLoggedIn, login, checkTokenExp, validateToken }}
+        >
             {children}
         </UserContext.Provider>
     );

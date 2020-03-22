@@ -11,6 +11,8 @@ export const UserReducer = (state, action) => {
             ];
         case 'LOGOUT':
             return [];
+        case 'VALIDATE':
+            return [];
         default:
             return state;
     }
