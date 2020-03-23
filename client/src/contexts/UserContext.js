@@ -1,10 +1,29 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useReducer } from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { UserReducer } from '../reducers/UserReducer';
 
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
+    // we're setting a default value for the auth state by
+    // looking for a token in local storage
+    const [auth, dispatch] = useReducer(UserReducer, {}, () => {
+        let data;
+        let token = localStorage.getItem('token');
+        if (token) {
+            let { id, email, iat, exp } = jwtDecode(token);
+            data = {
+                loggedIn: true,
+                id,
+                email,
+                iat,
+                exp
+            };
+        }
+        return token ? data : { loggedin: false };
+    });
+
     const [loggedIn, setLoggedIn] = useState(false);
 
     const login = (e, email, password) => {
@@ -60,7 +79,7 @@ export const UserContextProvider = ({ children }) => {
 
     return (
         <UserContext.Provider
-            value={{ loggedIn, setLoggedIn, login, checkTokenExp, validateToken }}
+            value={{ auth, loggedIn, setLoggedIn, login, checkTokenExp, validateToken }}
         >
             {children}
         </UserContext.Provider>
