@@ -43,24 +43,6 @@ export const UserContextProvider = ({ children }) => {
 
     const [loggedIn, setLoggedIn] = useState(false);
 
-    const login = (e, email, password) => {
-        e.preventDefault();
-
-        axios({
-            method: 'POST',
-            url: '/api/user/login/',
-            data: { email, password }
-        })
-            .then((res) => {
-                const { token } = res.data;
-                localStorage.setItem('token', token.split(' ')[1]);
-                setLoggedIn(true);
-                email = '';
-                password = '';
-            })
-            .catch((err) => console.log(err.response));
-    };
-
     const validateToken = async () => {
         axios({
             method: 'GET',
@@ -95,7 +77,7 @@ export const UserContextProvider = ({ children }) => {
 
     return (
         <UserContext.Provider
-            value={{ auth, dispatch, loggedIn, setLoggedIn, login, checkTokenExp, validateToken }}
+            value={{ auth, dispatch, loggedIn, setLoggedIn, checkTokenExp, validateToken }}
         >
             {children}
         </UserContext.Provider>

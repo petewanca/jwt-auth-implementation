@@ -5,12 +5,20 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { login, checkTokenExp, validateToken } = useContext(UserContext);
+    const { login, dispatch } = useContext(UserContext);
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        dispatch({
+            type: 'LOGIN',
+            payload: { email, password }
+        });
+    };
 
     return (
         <>
             <h5>Login</h5>
-            <form onSubmit={(e) => login(e, email, password)}>
+            <form onSubmit={handleFormSubmit}>
                 <input
                     placeholder='enter email'
                     required
@@ -29,9 +37,9 @@ export const Login = () => {
                 <br />
                 <button type='submit'>login</button>
             </form>
-            <button onClick={checkTokenExp}>check token</button>
-            <br />
-            <button onClick={validateToken}>validate token</button>
+            {/* <button onClick={checkTokenExp}>check token</button> */}
+            {/* <br /> */}
+            {/* <button onClick={validateToken}>validate token</button> */}
         </>
     );
 };

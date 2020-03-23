@@ -12,6 +12,7 @@ Reducer setup
 
 ## NEXT
 
+-   Clean up payload from server side
 -   Appropriate error response codes
 
 ## COMPLETE
