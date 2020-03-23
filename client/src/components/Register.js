@@ -9,6 +9,7 @@ export const Register = () => {
 
     return (
         <form>
+            <h5>Register</h5>
             <input
                 placeholder='enter first name'
                 required

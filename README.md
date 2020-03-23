@@ -6,7 +6,6 @@ A full stack demo of user auth utilizing MERN stack (MongoDB, Express, React, No
 
 Reducer setup
 
--   validate that exp date has not passed when setting global auth state
 -   convert callbacks to actions for reducer to consume
 -   add logout functionality (devalidate jwt issued and clear local storage)
 -   consider running tests to validate jwt via server route
