@@ -4,25 +4,23 @@ A full stack demo of user auth utilizing MERN stack (MongoDB, Express, React, No
 
 ## IN PROGRESS
 
-handle login / updating user context after login
+Reducer setup
 
--   User logs in through form at component level
--   User input is stored in state at component level
--   Pull login function from context and use state level input to send call to backend
+-   validate that exp date has not passed when setting global auth state
+-   convert callbacks to actions for reducer to consume
+-   add logout functionality (devalidate jwt issued and clear local storage)
+-   consider running tests to validate jwt via server route
 
 ## NEXT
 
--   reducer setup
--   global state for login / token
--   LAST http error response codes
--   LAAAAAST styling
+-   Appropriate error response codes
 
 ## COMPLETE
 
--   db model config
--   passport config
--   passport auth route
--   context setup
--   get token client side
--   store token in local storage
--   basic client side router
+-   DB model config
+-   Passport config
+-   Passport auth route
+-   Context setup
+-   Get token client side
+-   Store token in local storage
+-   Basic client side router
