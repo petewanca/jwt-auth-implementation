@@ -6,12 +6,14 @@ A full stack demo of user auth utilizing MERN stack (MongoDB, Express, React, No
 
 Reducer setup
 
--   convert callbacks to actions for reducer to consume
--   add logout functionality (devalidate jwt issued and clear local storage)
+-   Verify token callback converted to reducer action
 -   consider running tests to validate jwt via server route
 
 ## NEXT
 
+-   Clean up redirects on login
+-   Clean up redirects on logout
+-   Clean up redirects on validate token
 -   Clean up payload from server side
 -   Appropriate error response codes
 
@@ -24,3 +26,5 @@ Reducer setup
 -   Get token client side
 -   Store token in local storage
 -   Basic client side router
+-   Fix redirect at app level
+-   Logout action for reducer

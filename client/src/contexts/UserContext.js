@@ -1,5 +1,4 @@
-import React, { useState, createContext, useReducer } from 'react';
-import axios from 'axios';
+import React, { createContext, useReducer } from 'react';
 import jwtDecode from 'jwt-decode';
 import { UserReducer } from '../reducers/UserReducer';
 
@@ -9,8 +8,8 @@ export const UserContextProvider = ({ children }) => {
     // Setting a default value for the auth state
     // by looking for a token in local storage
     const [auth, dispatch] = useReducer(UserReducer, {}, () => {
-        let data;
         let token = localStorage.getItem('token');
+        let data;
 
         // If there's a token, compare the current
         // time to when the token expires
@@ -19,7 +18,7 @@ export const UserContextProvider = ({ children }) => {
             let currentTime = Date.now() / 1000;
             // If the token is expired, clear the token from
             // local storage and set auth.loggedIn to false
-            if (currentTime > exp) {
+            if (currentTime >= exp) {
                 localStorage.removeItem('token');
                 data = {
                     loggedIn: false
@@ -41,45 +40,5 @@ export const UserContextProvider = ({ children }) => {
         return token ? data : { loggedin: false };
     });
 
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    const validateToken = async () => {
-        axios({
-            method: 'GET',
-            url: '/api/user/validate',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-            .then((res) => console.log(res.data))
-            .catch((err) => console.log(err.response));
-    };
-
-    const checkTokenExp = async () => {
-        const token = localStorage.getItem('token');
-        const currentTime = Date.now() / 1000;
-
-        // if there is a token present, check it
-        if (token) {
-            const decodedToken = await jwtDecode(token);
-
-            // if the current time is greater than the
-            // token's expiration, console log
-            if (currentTime > decodedToken.exp) {
-                console.log('token has expired');
-                // else log that its still valid
-            } else {
-                console.log('still valid');
-                console.log(decodedToken);
-            }
-        } else console.log('no token');
-    };
-
-    return (
-        <UserContext.Provider
-            value={{ auth, dispatch, loggedIn, setLoggedIn, checkTokenExp, validateToken }}
-        >
-            {children}
-        </UserContext.Provider>
-    );
+    return <UserContext.Provider value={{ auth, dispatch }}>{children}</UserContext.Provider>;
 };
