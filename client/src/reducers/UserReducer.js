@@ -1,18 +1,13 @@
 import axios from 'axios';
 // import jwtDecode from 'jwt-decode';
 
-// look into passing information back after your axios post routes have run
-
-// this will need to be handled client side for redirection
-
 export const UserReducer = (state, action) => {
     switch (action.type) {
         // ==========================================
         // ========== HANDLE LOGIN ACTION ===========
         // ==========================================
         case 'LOGIN':
-            console.log('action login is happening!');
-            // LoginHelper(action.payload.email, action.payload.password, state);
+            console.log('Dispatched LOGIN action.');
             axios({
                 method: 'POST',
                 url: '/api/user/login/',
@@ -21,20 +16,18 @@ export const UserReducer = (state, action) => {
                 .then((res) => {
                     const { token } = res.data;
                     localStorage.setItem('token', token.split(' ')[1]);
+                    state = { loggedIn: true };
                 })
                 .catch((err) => {
                     localStorage.setItem('error', JSON.stringify(err.response.data));
                     state = { loggedIn: false };
                 });
-
-            const token = localStorage.getItem('token');
-            if (token) {
-                return { loggedIn: true };
-            }
+            break;
         // ==========================================
         // ========= HANDLE LOGOUT ACTION ===========
         // ==========================================
         case 'LOGOUT':
+            console.log('Dispatched LOGOUT action.');
             localStorage.removeItem('token');
             return {
                 loggedIn: false
@@ -44,6 +37,7 @@ export const UserReducer = (state, action) => {
         // ======= HANDLE VALIDATION ACTION =========
         // ==========================================
         case 'VALIDATE':
+            console.log('Dispatched VALIDATE action.');
             axios({
                 method: 'GET',
                 url: '/api/user/validate',

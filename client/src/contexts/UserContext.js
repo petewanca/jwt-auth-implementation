@@ -7,14 +7,14 @@ export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
     // Setting a default value for the auth state
     // by looking for a token in local storage
-    const [auth, dispatch] = useReducer(UserReducer, {}, () => {
+    const [auth, dispatch] = useReducer(UserReducer, { loggedIn: false }, () => {
         const token = localStorage.getItem('token');
         let data;
 
         // If there's a token, compare the current
         // time to when the token expires
         if (token) {
-            const { id, email, iat, exp } = jwtDecode(token);
+            const { exp } = jwtDecode(token);
             const currentTime = Date.now() / 1000;
             // If the token is expired, clear the token from
             // local storage and set auth.loggedIn to false
@@ -27,11 +27,7 @@ export const UserContextProvider = ({ children }) => {
                 // and initialize the rest of auth state with user data
             } else if (exp > currentTime) {
                 data = {
-                    loggedIn: true,
-                    id,
-                    email,
-                    iat,
-                    exp
+                    loggedIn: true
                 };
             }
         }
