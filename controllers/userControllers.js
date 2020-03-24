@@ -31,7 +31,7 @@ module.exports = {
         // #5 ATTEMPT TO SAVE NEW USER
         try {
             await newUser.save();
-            res.status(200).send({ message: `Your email has been registered, ${firstName}!` });
+            res.status(200).send(`Your email has been registered, ${firstName}!`);
         } catch (error) {
             res.status(400).send(error);
         }
@@ -45,11 +45,11 @@ module.exports = {
 
         // #2 SEARCH FOR USER
         const userFound = await User.findOne({ email });
-        if (!userFound) return res.status(400).send({ message: 'Email or password is incorrect.' });
+        if (!userFound) return res.status(400).send('Email or password is incorrect.');
 
         // #3 VALIDATE PASSWORDS MATCH
         const match = await bcrypt.compare(password, userFound.password);
-        if (!match) return res.status(400).send({ message: 'Email or password is incorrect.' });
+        if (!match) return res.status(400).send('Email or password is incorrect.');
 
         // #4 CREATE PAYLOAD AND SIGN TOKEN TO USER
         const payload = {

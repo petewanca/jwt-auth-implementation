@@ -4,11 +4,10 @@ import { Redirect } from 'react-router-dom';
 
 export const Dashboard = () => {
     const { auth, dispatch } = useContext(UserContext);
-    const loggedIn = auth.loggedIn;
 
     return (
         <>
-            {loggedIn ? (
+            {auth.loggedIn ? (
                 <div>
                     <h5>Protected Component/Route</h5>
                     <button onClick={() => dispatch({ type: 'LOGOUT' })}>sign out</button>

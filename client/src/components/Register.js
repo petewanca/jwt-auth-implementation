@@ -10,11 +10,10 @@ export const Register = () => {
     const [passwordMatch, setPasswordMatch] = useState('');
 
     const { auth } = useContext(UserContext);
-    const loggedIn = auth.loggedIn;
 
     return (
         <>
-            {loggedIn ? (
+            {auth.loggedIn ? (
                 <Redirect to='/dashboard' />
             ) : (
                 <form>

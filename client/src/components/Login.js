@@ -7,7 +7,6 @@ export const Login = () => {
     const [password, setPassword] = useState('');
 
     const { auth, dispatch } = useContext(UserContext);
-    const loggedIn = auth.loggedIn;
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +18,7 @@ export const Login = () => {
 
     return (
         <>
-            {loggedIn ? (
+            {auth.loggedIn ? (
                 <Redirect to='/dashboard' />
             ) : (
                 <div>

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
 import { UserReducer } from '../reducers/UserReducer';
 
@@ -8,14 +8,14 @@ export const UserContextProvider = ({ children }) => {
     // Setting a default value for the auth state
     // by looking for a token in local storage
     const [auth, dispatch] = useReducer(UserReducer, {}, () => {
-        let token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         let data;
 
         // If there's a token, compare the current
         // time to when the token expires
         if (token) {
-            let { id, email, iat, exp } = jwtDecode(token);
-            let currentTime = Date.now() / 1000;
+            const { id, email, iat, exp } = jwtDecode(token);
+            const currentTime = Date.now() / 1000;
             // If the token is expired, clear the token from
             // local storage and set auth.loggedIn to false
             if (currentTime >= exp) {

@@ -15,6 +15,7 @@ Reducer setup
 -   Clean up redirects on logout
 -   Clean up redirects on validate token
 -   Clean up payload from server side
+-   What to do when token on client side is invalid?
 -   Appropriate error response codes
 
 ## COMPLETE
