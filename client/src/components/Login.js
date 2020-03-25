@@ -30,6 +30,7 @@ export const Login = () => {
                 dispatch({ type: 'LOGIN_SUCCESS', payload: { token } });
             })
             .catch((err) => {
+                setPassword('');
                 const { data } = err.response;
                 localStorage.setItem('error', data);
                 dispatch({ type: 'LOGIN_ERROR', payload: { error: data } });
@@ -44,6 +45,7 @@ export const Login = () => {
                 <div>
                     <h5>Login</h5>
                     <h3>{auth.errorMessage ? auth.errorMessage : null}</h3>
+                    <h3>{auth.successMessage ? auth.successMessage : null}</h3>
                     <form onSubmit={handleFormSubmit}>
                         <input
                             placeholder='enter email'

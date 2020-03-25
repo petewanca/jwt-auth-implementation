@@ -6,15 +6,12 @@ A full stack demo of user auth utilizing MERN stack (MongoDB, Express, React, No
 
 Reducer setup
 
--   Add register reducer
--   Finish validate reducer
--   Verify token callback converted to reducer action
+-   Add more error messages if token expires versus if its compromised
 -   consider running tests to validate jwt via server route
 
 ## NEXT
 
--   Clean up redirects on validate token
-
+-   Add option to extend user session with refresh token
 -   Appropriate error response codes
 
 ## COMPLETE
@@ -31,4 +28,5 @@ Reducer setup
 -   Clean up redirects on login
 -   Clean up redirects on logout
 -   Clean up payload from server side
+-   Clean up redirects on validate token
 -   What to do when token on client side is invalid?

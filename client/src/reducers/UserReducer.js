@@ -41,15 +41,14 @@ export const UserReducer = (state, action) => {
             localStorage.removeItem('token');
             return {
                 loggedIn: false,
-                errorMessage:
-                    "Your login session's security was compromised. If this issue persists, please contact our support team."
+                errorMessage: 'Your session has expired.'
             };
 
         // # CASE DESC
         // # Handle success response from Axios register call
         case 'REGISTER_SUCCESS':
             console.log('REGISTER SUCCESS action dispatched.');
-            return { loggedIn: false, successMessage: action.payload.success };
+            return { loggedIn: false, registered: true, successMessage: action.payload.success };
 
         // # CASE DESC
         // # Handle failure response from Axios register call

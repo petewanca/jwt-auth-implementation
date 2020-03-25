@@ -31,13 +31,10 @@ export const Register = () => {
                 .then((res) => {
                     const { data } = res;
                     dispatch({ type: 'REGISTER_SUCCESS', payload: { success: data } });
-                    setFirstName('');
-                    setLastName('');
-                    setEmail('');
-                    setPassword('');
-                    setPasswordMatch('');
                 })
                 .catch((err) => {
+                    setPassword('');
+                    setPasswordMatch('');
                     const { data } = err.response;
                     dispatch({ type: 'REGISTER_FAILURE', payload: { error: data } });
                 });
@@ -48,62 +45,66 @@ export const Register = () => {
         }
     };
 
-    return (
-        <>
-            {auth.loggedIn ? (
-                <Redirect to='/dashboard' />
-            ) : (
-                <form onSubmit={handleFormSubmit}>
-                    <h5>Register</h5>
-                    <h3>{auth.errorMessage ? auth.errorMessage : null}</h3>
-                    <h3>{auth.successMessage ? auth.successMessage : null}</h3>
-                    <h3>{localError ? localError : null}</h3>
-                    <input
-                        placeholder='enter first name'
-                        required
-                        type='text'
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                    />
-                    <br />
-                    <input
-                        placeholder='enter last name'
-                        required
-                        type='text'
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
-                    <br />
+    let formRender;
 
-                    <input
-                        placeholder='enter email'
-                        required
-                        type='email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <br />
+    if (auth.registered) {
+        formRender = <Redirect to='/' />;
+    } else if (auth.loggedIn) {
+        formRender = <Redirect to='/dashboard' />;
+    } else {
+        formRender = (
+            <form onSubmit={handleFormSubmit}>
+                <h5>Register</h5>
+                <h3>{auth.errorMessage ? auth.errorMessage : null}</h3>
+                <h3>{auth.successMessage ? auth.successMessage : null}</h3>
+                <h3>{localError ? localError : null}</h3>
+                <input
+                    placeholder='enter first name'
+                    required
+                    type='text'
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                />
+                <br />
+                <input
+                    placeholder='enter last name'
+                    required
+                    type='text'
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                />
+                <br />
 
-                    <input
-                        placeholder='enter password'
-                        required
-                        type='password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <br />
+                <input
+                    placeholder='enter email'
+                    required
+                    type='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <br />
 
-                    <input
-                        placeholder='re-enter password'
-                        required
-                        type='password'
-                        value={passwordMatch}
-                        onChange={(e) => setPasswordMatch(e.target.value)}
-                    />
-                    <br />
-                    <button type='submit'>register</button>
-                </form>
-            )}
-        </>
-    );
+                <input
+                    placeholder='enter password'
+                    required
+                    type='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <br />
+
+                <input
+                    placeholder='re-enter password'
+                    required
+                    type='password'
+                    value={passwordMatch}
+                    onChange={(e) => setPasswordMatch(e.target.value)}
+                />
+                <br />
+                <button type='submit'>register</button>
+            </form>
+        );
+    }
+
+    return <>{formRender}</>;
 };
