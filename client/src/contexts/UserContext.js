@@ -8,6 +8,9 @@ export const UserContextProvider = ({ children }) => {
     // Setting a default value for the auth state
     // by looking for a token in local storage
     const [auth, dispatch] = useReducer(UserReducer, { loggedIn: false }, () => {
+        // If there was an error from a previous login
+        // attempt, clear it from local storage
+        localStorage.removeItem('error');
         const token = localStorage.getItem('token');
         let data;
 
