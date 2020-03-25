@@ -1,7 +1,10 @@
-import React from 'react';
+import { useContext } from 'react';
 import axios from 'axios';
+import { UserContext } from '../contexts/UserContext';
 
-export const LoginUser = (email, password, dispatch) => {
+export const LoginUser = (email, password) => {
+    const { dispatch } = useContext(UserContext);
+
     axios({
         method: 'POST',
         url: '/api/user/login/',
@@ -15,6 +18,4 @@ export const LoginUser = (email, password, dispatch) => {
         .catch((err) => {
             localStorage.setItem('error', JSON.stringify(err.response.data));
         });
-
-    return <></>;
 };

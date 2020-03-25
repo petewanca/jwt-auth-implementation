@@ -6,6 +6,9 @@ A full stack demo of user auth utilizing MERN stack (MongoDB, Express, React, No
 
 Reducer setup
 
+-   Handle error for login
+-   Add register reducer
+-   Finish validate reducer
 -   Verify token callback converted to reducer action
 -   consider running tests to validate jwt via server route
 

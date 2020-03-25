@@ -3,36 +3,31 @@ import jwtDecode from 'jwt-decode';
 
 export const UserReducer = (state, action) => {
     switch (action.type) {
-        // ==========================================
-        // ========== HANDLE LOGIN ACTION ===========
-        // ==========================================
+        // # DESC  ==================================
+        // # HANDLE SUCCESS RES FROM AXIOS LOGIN CALL
         case 'LOGIN':
-            console.log('Dispatched LOGIN action.');
+            console.log('LOGIN action dispatched.');
             const token = action.payload.token;
             if (token) {
                 const currentTime = Date.now() / 1000;
                 const { exp } = jwtDecode(token);
-
                 if (currentTime >= exp) return { loggedIn: false };
-
                 if (exp > currentTime) return { loggedIn: true };
             }
-            return state;
-        // ==========================================
-        // ========= HANDLE LOGOUT ACTION ===========
+            break;
+        // # DESC ===================================
         // ==========================================
         case 'LOGOUT':
-            console.log('Dispatched LOGOUT action.');
+            console.log('LOGOUT action dispatched.');
             localStorage.removeItem('token');
             return {
                 loggedIn: false
             };
 
-        // ==========================================
         // ======= HANDLE VALIDATION ACTION =========
         // ==========================================
         case 'VALIDATE':
-            console.log('Dispatched VALIDATE action.');
+            console.log('VALIDATE action dispatched.');
             axios({
                 method: 'GET',
                 url: '/api/user/validate',

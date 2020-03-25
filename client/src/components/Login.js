@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
-import { LoginUser } from '../actions/UserAuthActions';
+// import { LoginUser } from '../actions/UserAuthActions';
 import axios from 'axios';
 
 export const Login = () => {
@@ -12,6 +12,13 @@ export const Login = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
+
+        // I've tried importing LoginUser from an Actions folder so that
+        // could store my axios call but when I try to run line 20, I get
+        // an invalid hook call. Calling dispatch in the file that contains
+        // LoginUser() ('../actions/UserAuthActions') throws errors
+        // LoginUser(email, password);
+
         axios({
             method: 'POST',
             url: '/api/user/login/',
