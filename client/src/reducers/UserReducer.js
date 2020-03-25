@@ -20,7 +20,6 @@ export const UserReducer = (state, action) => {
         // # Handle failure response from Axios login call
         case 'LOGIN_ERROR':
             console.log('LOGIN ERROR action dispatched.');
-
             return { loggedIn: false, errorMessage: action.payload.error };
 
         // # CASE DESC
@@ -31,20 +30,22 @@ export const UserReducer = (state, action) => {
             return { loggedIn: false };
 
         // # CASE DESC
-        // # Handle test validation of token
-        case 'VALIDATE':
-            console.log('VALIDATE action dispatched.');
-            axios({
-                method: 'GET',
-                url: '/api/user/validate',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            })
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err.response));
+        // # Handle successful validation of token
+        case 'VALIDATE_SUCCESS':
+            console.log('VALIDATE SUCCESS action dispatched.');
+            return { ...state, successMessage: 'Still authorized!' };
 
-            return state;
+        // # CASE DESC
+        // # Handle failed validation of token
+        case 'VALIDATE_FAILURE':
+            console.log('VALIDATE FAILURE action dispatched.');
+            localStorage.removeItem('token');
+            return {
+                loggedIn: false,
+                errorMessage:
+                    "Your login session's security was compromised. If this issue persists, please contact our support team."
+            };
+        ///////////////////////////////////////////////
         default:
             return state;
     }
