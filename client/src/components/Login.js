@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
+import { LoginUser } from '../actions/UserAuthActions';
+import axios from 'axios';
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,10 +12,19 @@ export const Login = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        dispatch({
-            type: 'LOGIN',
-            payload: { email, password }
-        });
+        axios({
+            method: 'POST',
+            url: '/api/user/login/',
+            data: { email, password }
+        })
+            .then((res) => {
+                const { token } = res.data;
+                localStorage.setItem('token', token.split(' ')[1]);
+                dispatch({ type: 'LOGIN', payload: { token } });
+            })
+            .catch((err) => {
+                localStorage.setItem('error', JSON.stringify(err.response.data));
+            });
     };
 
     return (

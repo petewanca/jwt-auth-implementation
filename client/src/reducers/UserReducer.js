@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import jwtDecode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 export const UserReducer = (state, action) => {
     switch (action.type) {
@@ -8,21 +8,16 @@ export const UserReducer = (state, action) => {
         // ==========================================
         case 'LOGIN':
             console.log('Dispatched LOGIN action.');
-            axios({
-                method: 'POST',
-                url: '/api/user/login/',
-                data: { email: action.payload.email, password: action.payload.password }
-            })
-                .then((res) => {
-                    const { token } = res.data;
-                    localStorage.setItem('token', token.split(' ')[1]);
-                    state = { loggedIn: true };
-                })
-                .catch((err) => {
-                    localStorage.setItem('error', JSON.stringify(err.response.data));
-                    state = { loggedIn: false };
-                });
-            break;
+            const token = action.payload.token;
+            if (token) {
+                const currentTime = Date.now() / 1000;
+                const { exp } = jwtDecode(token);
+
+                if (currentTime >= exp) return { loggedIn: false };
+
+                if (exp > currentTime) return { loggedIn: true };
+            }
+            return state;
         // ==========================================
         // ========= HANDLE LOGOUT ACTION ===========
         // ==========================================
