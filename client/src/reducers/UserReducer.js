@@ -19,7 +19,10 @@ export const UserReducer = (state, action) => {
         // # Handle failure response from Axios login call
         case 'LOGIN_ERROR':
             console.log('LOGIN ERROR action dispatched.');
-            return { loggedIn: false, errorMessage: action.payload.error };
+            return {
+                loggedIn: false,
+                errorMessage: action.payload.error
+            };
 
         // # CASE DESC
         // # Handle logout button click from client
@@ -29,10 +32,32 @@ export const UserReducer = (state, action) => {
             return { loggedIn: false };
 
         // # CASE DESC
+        // # Handle success response from Axios register call
+        case 'REGISTER_SUCCESS':
+            console.log('REGISTER SUCCESS action dispatched.');
+            return {
+                loggedIn: false,
+                registered: true,
+                successMessage: action.payload.success
+            };
+
+        // # CASE DESC
+        // # Handle failure response from Axios register call
+        case 'REGISTER_FAILURE':
+            console.log('REGISTER FAILURE action dispatched.');
+            return {
+                loggedIn: false,
+                errorMessage: action.payload.error
+            };
+
+        // # CASE DESC
         // # Handle successful validation of token
         case 'VALIDATE_SUCCESS':
             console.log('VALIDATE SUCCESS action dispatched.');
-            return { ...state, successMessage: 'Still authorized!' };
+            return {
+                ...state,
+                successMessage: 'Still authorized!'
+            };
 
         // # CASE DESC
         // # Handle failed validation of token
@@ -44,17 +69,6 @@ export const UserReducer = (state, action) => {
                 errorMessage: 'Your session has expired.'
             };
 
-        // # CASE DESC
-        // # Handle success response from Axios register call
-        case 'REGISTER_SUCCESS':
-            console.log('REGISTER SUCCESS action dispatched.');
-            return { loggedIn: false, registered: true, successMessage: action.payload.success };
-
-        // # CASE DESC
-        // # Handle failure response from Axios register call
-        case 'REGISTER_FAILURE':
-            console.log('REGISTER FAILURE action dispatched.');
-            return { loggedIn: false, errorMessage: action.payload.error };
         default:
             return state;
     }
