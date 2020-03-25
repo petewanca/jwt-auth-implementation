@@ -6,7 +6,6 @@ A full stack demo of user auth utilizing MERN stack (MongoDB, Express, React, No
 
 Reducer setup
 
--   Handle error for login
 -   Add register reducer
 -   Finish validate reducer
 -   Verify token callback converted to reducer action
@@ -14,11 +13,8 @@ Reducer setup
 
 ## NEXT
 
--   Clean up redirects on login
--   Clean up redirects on logout
 -   Clean up redirects on validate token
--   Clean up payload from server side
--   What to do when token on client side is invalid?
+
 -   Appropriate error response codes
 
 ## COMPLETE
@@ -32,3 +28,7 @@ Reducer setup
 -   Basic client side router
 -   Fix redirect at app level
 -   Logout action for reducer
+-   Clean up redirects on login
+-   Clean up redirects on logout
+-   Clean up payload from server side
+-   What to do when token on client side is invalid?

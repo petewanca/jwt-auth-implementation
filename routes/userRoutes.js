@@ -1,6 +1,3 @@
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const { registerValidation, loginValidation } = require('../controllers/helpers');
 const { RegisterController, LoginController } = require('../controllers/userControllers');
 const passport = require('passport');
 

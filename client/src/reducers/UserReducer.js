@@ -1,4 +1,3 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
 export const UserReducer = (state, action) => {
@@ -45,7 +44,18 @@ export const UserReducer = (state, action) => {
                 errorMessage:
                     "Your login session's security was compromised. If this issue persists, please contact our support team."
             };
-        ///////////////////////////////////////////////
+
+        // # CASE DESC
+        // # Handle success response from Axios register call
+        case 'REGISTER_SUCCESS':
+            console.log('REGISTER SUCCESS action dispatched.');
+            return { loggedIn: false, successMessage: action.payload.success };
+
+        // # CASE DESC
+        // # Handle failure response from Axios register call
+        case 'REGISTER_FAILURE':
+            console.log('REGISTER FAILURE action dispatched.');
+            return { loggedIn: false, errorMessage: action.payload.error };
         default:
             return state;
     }

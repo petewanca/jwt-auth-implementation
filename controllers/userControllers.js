@@ -14,7 +14,7 @@ module.exports = {
 
         // #2 CHECK IF EMAIL ALREADY REGISTERED
         const emailRegistered = await User.findOne({ email });
-        if (emailRegistered) return res.status(400).send({ message: 'Email already in use.' });
+        if (emailRegistered) return res.status(400).send('Email already in use.');
 
         // #3 ENCRYPT PASSWORD
         const salt = await bcrypt.genSalt();
@@ -56,7 +56,7 @@ module.exports = {
             id: userFound._id,
             email: userFound.email
         };
-        const token = await jwt.sign(payload, secret, { expiresIn: '1hr' });
+        const token = await jwt.sign(payload, secret, { expiresIn: '10s' });
         res.status(200).send({ token: `Bearer ${token}` });
     }
 };
