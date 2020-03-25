@@ -26,6 +26,7 @@ export const Login = () => {
         })
             .then((res) => {
                 const { token } = res.data;
+                localStorage.removeItem('error');
                 localStorage.setItem('token', token.split(' ')[1]);
                 dispatch({ type: 'LOGIN_SUCCESS', payload: { token } });
             })
