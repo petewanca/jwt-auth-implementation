@@ -5,7 +5,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-// EXPRESS RESPONSE PARSIN
+// EXPRESS RESPONSE PARSING
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
